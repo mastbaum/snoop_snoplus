@@ -11,6 +11,7 @@ processor_paths = [
 # keyword arguments
 processor_kwargs = {
     'count': {'interval': 2000},
+    'reconstruction': {'rat_servers': [('localhost', 7770)]}
 }
 
 # Writer to handle output
@@ -18,6 +19,8 @@ from snoop.writer import PrintWriter
 writer = PrintWriter()
 
 # Reader from which to get events
-from snoop_snoplus.reader import AirfillReader
-reader = AirfillReader('./sample_data/file.root')
+#from snoop_snoplus.reader import AirfillReader
+#reader = AirfillReader('./sample_data/file.root')
+from snoop.reader import DispatchReader
+reader = DispatchReader('localhost')
 

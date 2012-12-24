@@ -18,12 +18,16 @@ class NHITStatistics(Processor):
         '''
         self.count += 1
 
-        self.mean_nhit = self.mean_nhit + (nhit - self.mean_nhit) / self.count
+        try:
+            self.mean_nhit = self.mean_nhit + (nhit - self.mean_nhit) / self.count
 
-        if nhit < 30:
-            self.count_lt_30 += 1
-        else:
-            self.count_gte_30 += 1
+            if nhit < 30:
+                self.count_lt_30 += 1
+            else:
+                self.count_gte_30 += 1
+
+        except ZeroDivisionError:
+            pass
 
     def event(self, event):
         if isinstance(event, ROOT.RAT.DS.PackedEvent):
